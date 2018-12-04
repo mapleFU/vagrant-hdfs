@@ -8,18 +8,25 @@ sudo add-apt-repository ppa:webupd8team/java -y
 
 sudo apt-get update
 
+kill $(ps -e | grep 'apt-get' | awk '{print $1}')
+
 sudo rm /var/lib/apt/lists/lock
 sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
 
 sudo dpkg --configure -a
 
-sudo apt-get install oracle-java8-installer -y
+echo "[Info] Install oracle-java8-installer"
+# RUN SILENT INSTALL
+echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
+sudo apt-get install -y oracle-java8-installer
+echo "[Info] Install oracle-java8-installer done"
 
 sudo apt-get install oracle-java8-set-default -y
+echo "[Info] Install oracle-java8-set-default done"
 
 # 下载 hadoop 
-sudo apt-get install -y wget
+# sudo apt-get install -y wget
 
 # wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/core/hadoop-2.9.2/hadoop-2.9.2.tar.gz
 sudo tar -xzvf  /vagrant/hadoop-config/hadoop-2.9.2.tar.gz    -C /usr/local 
@@ -32,3 +39,5 @@ sudo echo "export HADOOP_HOME=/usr/local/hadoop" >> /etc/profile
 sudo echo "export PATH=$PATH:$HADOOP_HOME/bin" >>  /etc/profile
 
 source /etc/profile
+
+sudo apt-get clean

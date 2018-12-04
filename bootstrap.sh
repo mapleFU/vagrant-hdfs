@@ -22,6 +22,13 @@ sudo apt-get install oracle-java8-set-default -y
 sudo apt-get install -y wget
 
 # wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/core/hadoop-2.9.2/hadoop-2.9.2.tar.gz
-tar -xzvf  /vagrant/hadoop-config/hadoop-2.9.2.tar.gz    -C /usr/local 
+sudo tar -xzvf  /vagrant/hadoop-config/hadoop-2.9.2.tar.gz    -C /usr/local 
 
+sudo mv /usr/local/hadoop-2.9.2 /usr/local/hadoop
 # mv  hadoop  hadoop
+
+# 设置环境变量
+sudo echo "export HADOOP_HOME=/usr/local/hadoop" >> /etc/profile
+sudo echo "export PATH=$PATH:$HADOOP_HOME/bin" >>  /etc/profile
+
+source /etc/profile

@@ -33,3 +33,5 @@ hadoop-tools/hadoop-openstack/src/test/resources/contract-test-options.xml
 # End of https://www.gitignore.io/api/vagrant,apachehadoop
 
 *.tar.gz
+
+*.log

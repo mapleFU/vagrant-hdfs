@@ -17,6 +17,8 @@ Then, install hadoop file in this directory and install file.
 ```bash
 cd vagrant-hdfs
 
+cd hadoop292
+
 wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/core/hadoop-2.9.2/hadoop-2.9.2.tar.gz
 ```
 
@@ -35,6 +37,19 @@ vagrant package --output hadoop292.box
 vagrant box add hadoop292 hadoop292.box
 ```
 
-
-
 Now, you can have fun using hadoop with this box.
+
+## TestHadoop (You can skip it)
+
+Now we built a hadoop 2.9.2 box with ubuntu 16.04. We can get into newboxtest to test it.
+
+## Build Hadoop Cluster
+
+
+```
+cd hadoop-cluster
+
+vagrant up
+```
+
+Now you can visit your cluster~

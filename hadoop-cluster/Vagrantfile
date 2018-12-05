@@ -23,20 +23,27 @@ Vagrant.configure("2") do |config|
     master.vm.provision "master_init", type: "shell", path: "init_scripts/master.sh"
     # master.ssh.username = "vagrant"
     # master.ssh.password = "vagrant"
+    master.vm.provision "master_hadoop", type: "shell", path: "init_scripts/hadoop_master_config.sh"
+    master.vm.provision "master_ssh_config", type: "shell", path: "init_scripts/public_ssh_allow.sh"
+    master.vm.provision "master_hadoop_grp", type: "shell", path: "init_scripts/user_grp.sh"
   end
 
-  3.times { |time|
+  2.times { |time|
     tmp = time + 1
     config.vm.define "slave#{tmp}" do |slave|
       slave.vm.box = "hadoop292"
       slave.vm.synced_folder "./hadoop-config", "/hadoop-config", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"], type: "rsync"
 
-      slave.vm.network :private_network, ip: "192.168.50.#{tmp}"
+      slave.vm.network :private_network, ip: "192.168.50.#{time + 100}"
 
-      slave.vm.provision "slave_init", type: "shell", path: "init_scripts/slave.sh"
+      slave.vm.provision "slave#{tmp}_init", type: "shell", path: "init_scripts/slave.sh"
+      slave.vm.provision "slave#{tmp}_ssh_config", type: "shell", path: "init_scripts/public_ssh_allow.sh"
+      slave.vm.provision "slave#{tmp}_hadoop", type: "shell", path: "init_scripts/hadoop_master_config.sh"
+      slave.vm.provision "master_hadoop_grp", type: "shell", path: "init_scripts/user_grp.sh"
     end
   }
 
+  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

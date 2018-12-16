@@ -9,3 +9,16 @@ sudo sh -c "echo 'export PATH=$PATH:$HIVE_HOME/bin' >>  /etc/profile"
 # sudo echo "export PATH=$PATH:$HADOOP_HOME/bin" >>  /etc/profile
 
 source /etc/profile
+
+# set authority
+
+sudo groupadd hadoopgroup
+
+sudo usermod -a -G hadoopgroup vagrant
+
+sudo chgrp -R hadoopgroup /usr/local/hive/
+
+sudo chmod -R 777 /usr/local/hive/
+
+# INITIALIZE
+$HIVE_HOME/schematool -initSchema -dbType derby

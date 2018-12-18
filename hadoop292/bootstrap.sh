@@ -61,7 +61,7 @@ sudo usermod -a -G hadoopgroup vagrant
 
 sudo chgrp -R hadoopgroup /usr/local/hadoop/
 
-sudo chmod -R +w /usr/local/hadoop/
+sudo chmod -R 777 /usr/local/hadoop/
 
 sudo apt-get clean
 

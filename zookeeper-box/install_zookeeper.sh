@@ -9,7 +9,7 @@ sudo mv /usr/local/zookeeper-3.4.13 /usr/local/zookeeper
 
 # 设置环境变量
 sudo sh -c "echo 'export ZOOKEEPER_HOME=/usr/local/zookeeper' >> /etc/profile"
-sudo sh -c "echo 'export PATH=$PATH:/usr/local/zookeeper/conf' >>  /etc/profile"
+sudo sh -c "echo 'export PATH=$PATH:/usr/local/zookeeper/bin:/usr/local/zookeeper/sbin' >>  /etc/profile"
 # sudo echo "export HADOOP_HOME=/usr/local/hadoop" >> /etc/profile
 # sudo echo "export PATH=$PATH:$HADOOP_HOME/bin" >>  /etc/profile
 

@@ -26,6 +26,9 @@ Vagrant.configure("2") do |config|
       else
         master.vm.provision "ssh_init", type: "shell", path: "ssh_config/public_ssh_allow.sh"
       end
+
+      master.vm.provision "hadoop_init", type: "shell", path: "hadoop-config/init_hadoop.sh"
+      master.vm.provision "zoo_init", type: "shell", path: "zoo-config/init_zoo.sh"
       # master.vm.provision "master_init", type: "shell", path: "init_scripts/master.sh"
       # # master.ssh.username = "vagrant"
       # # master.ssh.password = "vagrant"
@@ -44,6 +47,8 @@ Vagrant.configure("2") do |config|
       slave.vm.network :private_network, ip: "192.168.50.#{time + 100}"
 
       slave.vm.provision "ssh_init", type: "shell", path: "ssh_config/public_ssh_allow.sh"
+      slave.vm.provision "hadoop_init", type: "shell", path: "hadoop-config/init_hadoop.sh"
+      slave.vm.provision "zoo_init", type: "shell", path: "zoo-config/init_zoo.sh"
       # slave.vm.provision "slave#{tmp}_init", type: "shell", path: "init_scripts/slave.sh"
       # slave.vm.provision "slave#{tmp}_ssh_config", type: "shell", path: "init_scripts/public_ssh_allow.sh"
       # slave.vm.provision "slave#{tmp}_hadoop", type: "shell", path: "init_scripts/hadoop_master_config.sh"

@@ -14,24 +14,29 @@
     <!-- 指定RM的名字 -->
     <property>
         <name>yarn.resourcemanager.ha.rm-ids</name>
-        <value>rm1,rm2</value>
+        <value>rm1,rm2,rm3</value>
     </property>
 
     <!-- 分别指定RM的地址 -->
     <property>
         <name>yarn.resourcemanager.hostname.rm1</name>
-        <value>hadoop3</value>
+        <value>slave1</value>
     </property>
 
     <property>
         <name>yarn.resourcemanager.hostname.rm2</name>
-        <value>hadoop4</value>
+        <value>slave2</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.hostname.rm3</name>
+        <value>slave3</value>
     </property>
 
     <!-- 指定zk集群地址 -->
     <property>
         <name>yarn.resourcemanager.zk-address</name>
-        <value>hadoop1:2181,hadoop2:2181,hadoop3:2181</value>
+        <value>name1:2181,name2:2181,slave1:2181</value>
     </property>
 
     <property>

@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+
+  # 配置 master
+  2.times { |time|
+    config.vm.define "name#{time + 1}" do |master|
+      master.vm.box = "hadoop-zookeeper"
+      # master.vm.synced_folder "./hadoop-config", "/hadoop-config", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"], type: "rsync"
+      # master.vm.synced_folder ".", "/vagrant", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"], type: "rsync"
+      master.vm.network :private_network, ip: "192.168.50.#{time + 4}"
+
+      if time == 0
+        master.vm.provision "ssh_init", type: "shell", path: "ssh_config/master.sh"
+      else
+        master.vm.provision "ssh_init", type: "shell", path: "ssh_config/public_ssh_allow.sh"
+      end
+      # master.vm.provision "master_init", type: "shell", path: "init_scripts/master.sh"
+      # # master.ssh.username = "vagrant"
+      # # master.ssh.password = "vagrant"
+      # master.vm.provision "master_hadoop", type: "shell", path: "init_scripts/hadoop_master_config.sh"
+      # master.vm.provision "master_ssh_config", type: "shell", path: "init_scripts/public_ssh_allow.sh"
+      # master.vm.provision "master_hadoop_grp", type: "shell", path: "init_scripts/user_grp.sh"
+    end
+  }
+
+  3.times { |time|
+    tmp = time + 1
+    config.vm.define "slave#{tmp}" do |slave|
+      slave.vm.box = "hadoop-zookeeper"
+      # slave.vm.synced_folder "./hadoop-config", "/hadoop-config", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"], type: "rsync"
+
+      slave.vm.network :private_network, ip: "192.168.50.#{time + 100}"
+
+      slave.vm.provision "ssh_init", type: "shell", path: "ssh_config/public_ssh_allow.sh"
+      # slave.vm.provision "slave#{tmp}_init", type: "shell", path: "init_scripts/slave.sh"
+      # slave.vm.provision "slave#{tmp}_ssh_config", type: "shell", path: "init_scripts/public_ssh_allow.sh"
+      # slave.vm.provision "slave#{tmp}_hadoop", type: "shell", path: "init_scripts/hadoop_master_config.sh"
+      # slave.vm.provision "master_hadoop_grp", type: "shell", path: "init_scripts/user_grp.sh"
+    end
+  }
+
+end

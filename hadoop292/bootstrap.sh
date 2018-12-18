@@ -43,4 +43,18 @@ sudo sh -c "echo 'export PATH=$PATH:$HADOOP_HOME/bin' >>  /etc/profile"
 
 source /etc/profile
 
+# hadoop 配置 权限和对应的 group 
+sudo groupadd hadoopgroup
+
+sudo usermod -a -G hadoopgroup vagrant
+
+sudo chgrp -R hadoopgroup /usr/local/hadoop/
+
+sudo chmod -R +w /usr/local/hadoop/
+
 sudo apt-get clean
+
+sudo dd if=/dev/zero of=/EMPTY bs=1M
+sudo rm -f /EMPTY
+
+cat /dev/null > ~/.bash_history && history -c && exit

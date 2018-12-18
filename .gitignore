@@ -35,3 +35,5 @@ hadoop-tools/hadoop-openstack/src/test/resources/contract-test-options.xml
 *.tar.gz
 
 *.log
+
+*.csv

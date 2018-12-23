@@ -1,0 +1,31 @@
+<configuration>
+        <property>
+                <name>dfs.namenode.name.dir</name>
+                <value>/home/vagrant/data/hadoopdata/name</value>
+                <description>为了保证元数据的安全一般配置多个不同目录</description>
+        </property>
+
+        <property>
+                <name>dfs.datanode.data.dir</name>
+                <value>/home/vagrant/data/hadoopdata/data</value>
+                <description>datanode 的数据存储目录</description>
+        </property>
+
+        <property>
+                <name>dfs.replication</name>
+                <value>2</value>
+                <description>HDFS 的数据块的副本存储个数, 默认是3</description>
+        </property>
+
+        <property>
+                <name>dfs.secondary.http.address</name>
+                <value>hadoop3:50090</value>
+                <description>secondarynamenode 运行节点的信息，和 namenode 不同节点</description>
+        </property>
+
+        <property>
+                <name>dfs.webhdfs.enabled</name>
+                <value>true</value>
+        </property>
+        
+</configuration>

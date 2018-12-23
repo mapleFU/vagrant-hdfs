@@ -1,0 +1,19 @@
+<configuration>
+        <property>
+                <name>fs.defaultFS</name>
+                <value>hdfs://hadoop1:9000</value>
+        </property>
+        <property>
+                <name>hadoop.tmp.dir</name>
+                <value>/home/vagrant/data/hadoopdata</value>
+        </property>
+        <!-- 注意，这个东西是 vagrant 的，他妈的不是 hadoop 的 -->
+        <property>
+                <name>hadoop.proxyuser.vagrant.hosts</name>
+                <value>*</value>
+        </property>
+        <property>
+                <name>hadoop.proxyuser.vagrant.groups</name>
+                <value>*</value>
+        </property>
+</configuration>

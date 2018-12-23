@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "hadoop config"
+
 sudo bash -c 'echo "export JAVA_HOME=\"/usr/lib/jvm/java-8-oracle\"" >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh'
 sudo bash -c 'echo "export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop/" >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh'
 

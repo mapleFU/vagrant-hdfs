@@ -11,6 +11,7 @@
         <name>dfs.namenode.name.dir</name>
         <value>/home/vagrant/data/hadoopdata/dfs/name</value>
     </property>
+    
     <property>
         <name>dfs.datanode.data.dir</name>
         <value>/home/vagrant/data/hadoopdata/dfs/data</value>

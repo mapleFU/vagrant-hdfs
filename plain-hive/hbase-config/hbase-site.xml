@@ -1,0 +1,12 @@
+<configuration>
+
+        <property>
+                <!-- 指定 hbase 在 HDFS 上存储的路径 -->
+                <name>hbase.rootdir</name>
+                <value>file:/home/vagrant/data/hbase</value>
+        </property>
+        <property>
+                <name>hbase.zookeeper.property.clientPort</name>
+                <value>2185</value>
+        </property>
+</configuration>

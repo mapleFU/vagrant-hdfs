@@ -21,8 +21,12 @@ Vagrant.configure("2") do |config|
       # master.vm.synced_folder ".", "/vagrant", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"], type: "rsync"
       master.vm.network :private_network, ip: "192.168.50.#{time + 4}"
 
+      master.vm.provision "hadoop-version-update", type: "shell", path: "hadoop-version-update/update.sh"
+
       if time == 0
         master.vm.provision "ssh-init", type: "shell", path: "ssh-config/master.sh"
+        # config sqoop
+        master.vm.provision "sqoop-init", type: "shell", path: "sqoop-config/install.sh"
       else
         master.vm.provision "ssh-init", type: "shell", path: "ssh-config/public_ssh_allow.sh"
       end
@@ -30,6 +34,11 @@ Vagrant.configure("2") do |config|
       master.vm.provision "hive-init", type: "shell", path: "hive-config/hive-config.sh"
 
       master.vm.provision "hadoop-init", type: "shell", path: "hadoop-config/init_hadoop.sh"
+      master.vm.provision "zoo-init", type: "shell", path: "zoo-config/init-zoo.sh", :args => "#{time + 1}"
+
+      master.vm.provision "hbase-init", type: "shell", path: "hbase-config/hbase-config.sh"
+
+      
       # master.vm.provision "zoo_init", type: "shell", path: "zoo-config/init_zoo.sh"
       # master.vm.provision "master_init", type: "shell", path: "init_scripts/master.sh"
       # # master.ssh.username = "vagrant"
